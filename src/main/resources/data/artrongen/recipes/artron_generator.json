@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iRi",
+    "CBg",
+    "iDi"
+  ],
+  "key": {
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    },
+    "C": {
+      "item": "tardis:artron_capacitor_high"
+    },
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "g": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "result": {
+    "item": "artrongen:artron_generator"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "generator": {
+    "category" : "blocks",
+    "sounds": [{
+      "name": "artrongen:generator",
+      "stream": false
+    }
+    ]
+  }
+}

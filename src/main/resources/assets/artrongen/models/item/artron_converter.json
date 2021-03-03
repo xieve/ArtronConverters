@@ -1,0 +1,14 @@
+{
+  "parent": "artrongen:block/artron_converter",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [ -45, 0, 0 ],
+      "translation": [ 0, 0, 0 ],
+      "scale": [ 0.55, 0.55, 0.55 ]
+    },
+    "gui": {
+      "rotation": [20,45,0],
+      "scale": [0.9,0.9,0.9]
+    }
+  }
+}

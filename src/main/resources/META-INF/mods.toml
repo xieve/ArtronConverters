@@ -1,0 +1,36 @@
+modLoader="javafml"
+loaderVersion="[35,)"
+license="All rights reserved"
+
+[[mods]]
+modId="artrongen"
+version="1.0"
+displayName="Artron Converters"
+credits="The team at New Tardis Mod for their awesome mod. LittleRobotSoundFactory on Freesound.org for the sound."
+authors="MrCyberdragon"
+description='''
+Revamped artron converters for New Tardis Mod.
+This allows you to convert between RF/FE and artron (ship power).
+For every AU created, Spectre will lose a hair.
+'''
+[[dependencies.artrongen]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.artrongen]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.artrongen]]
+    modId="tardis"
+    mandatory=true
+    versionRange="[1.5,)"
+    ordering="NONE"
+    side="BOTH"
+
