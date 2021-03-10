@@ -8,10 +8,11 @@ import net.tardis.mod.constants.Constants;
 import net.tardis.mod.items.misc.IAttunable;
 import net.tardis.mod.tileentities.ConsoleTile;
 
+public class UnattunedConverter extends BlockItem implements IAttunable {
 
-public class UnattunedGenerator extends BlockItem implements IAttunable {
-
-    public UnattunedGenerator(Block block, Properties prop) {super(block, prop);}
+    public UnattunedConverter(Block block, Properties prop) {
+        super(block, prop);
+    }
 
     @Override
     public ItemStack onAttuned(ItemStack itemStack, ConsoleTile consoleTile) {
@@ -20,6 +21,6 @@ public class UnattunedGenerator extends BlockItem implements IAttunable {
 
     @Override
     public int getAttunementTime() {
-        return Constants.ATTUNEMENT_TIME_GREATER;
+        return Constants.ATTUNEMENT_TIME_LESSER;
     }
 }

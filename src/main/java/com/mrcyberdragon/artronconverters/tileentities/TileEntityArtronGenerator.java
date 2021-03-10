@@ -101,6 +101,11 @@ public class TileEntityArtronGenerator extends TileEntity implements ITickableTi
     }
 
     @Override
+    public void handleUpdateTag(BlockState state, CompoundNBT tag) {
+        this.read(state, tag);
+    }
+
+    @Override
     public SUpdateTileEntityPacket getUpdatePacket(){
         CompoundNBT nbtTag = new CompoundNBT();
         this.write(nbtTag);

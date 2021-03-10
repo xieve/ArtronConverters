@@ -2,6 +2,7 @@
   "block.artrongen.artron_generator": "Electric Artron Generator",
   "block.artrongen.unattuned_generator": "Electric Artron Generator(Unattuned)",
   "block.artrongen.artron_converter": "Artron Converter",
+  "block.artrongen.unattuned_converter": "Artron Converter(Unattuned)",
   "tooltip.artron_generator.purpose": "Converts Forge Energy to Artron Energy.",
   "tooltip.artron_converter.purpose": "Converts Artron Energy to Forge Energy.",
   "tooltip.artron_generator.redstone": "Redstone deactivates this machine.",
