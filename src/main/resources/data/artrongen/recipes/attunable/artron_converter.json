@@ -1,0 +1,12 @@
+{
+  "add_attunement_tags": false,
+  "attunement_ticks": 3600,
+  "input": {
+    "item": "artrongen:unattuned_converter"
+  },
+  "result": {
+    "item": "artrongen:artron_converter"
+  },
+  "type": "tardis:attunable"
+
+}

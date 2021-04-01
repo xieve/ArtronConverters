@@ -1,0 +1,11 @@
+{
+  "add_attunement_tags": false,
+  "attunement_ticks": 18000,
+  "input": {
+    "item": "artrongen:unattuned_generator"
+  },
+  "result": {
+    "item": "artrongen:artron_generator"
+  },
+  "type": "tardis:attunable"
+}

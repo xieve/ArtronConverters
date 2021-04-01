@@ -17,7 +17,7 @@ public class UnattunedConverter extends Block {
 
     @Override
     public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(new TranslationTextComponent("tooltip.artron_generator.attunement"));
+        tooltip.add(new TranslationTextComponent("tooltip.artron_generator.attunable"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }

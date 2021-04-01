@@ -6,5 +6,6 @@
   "tooltip.artron_generator.purpose": "Converts Forge Energy to Artron Energy.",
   "tooltip.artron_converter.purpose": "Converts Artron Energy to Forge Energy.",
   "tooltip.artron_generator.redstone": "Redstone deactivates this machine.",
-  "tooltip.artron_generator.attunement": "This block must be attuned in a Tardis Engine."
+  "tooltip.artron_generator.attunable": "This block must be attuned in a Tardis Engine.",
+  "tooltip.artron_converter.attunable": "This block must be attuned in a Tardis Engine."
 }
