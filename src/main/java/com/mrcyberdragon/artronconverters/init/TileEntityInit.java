@@ -30,11 +30,4 @@ public class TileEntityInit {
         TileEntityType<T> type = TileEntityType.Builder.create(tile, validBlock).build(null);
         return type;
     }
-
-    @SubscribeEvent
-    public static void registerTE(RegistryEvent.Register<TileEntityType<?>> evt) {
-        for (TileEntityType<?> type : TYPES) {
-            evt.getRegistry().register(type);
-        }
-    }
 }

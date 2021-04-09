@@ -1,5 +1,6 @@
 package com.mrcyberdragon.artronconverters.blocks;
 
+import com.mrcyberdragon.artronconverters.init.TileEntityInit;
 import com.mrcyberdragon.artronconverters.tileentities.TileEntityArtronConverter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,8 +29,7 @@ public class ArtronConverter extends Block {
 
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        TileEntityType<?> type = new TileEntityArtronConverter().getType();
-        return type.create();
+        return TileEntityInit.ARTRON_CONVERTER.get().create();
     }
 
     @Override
