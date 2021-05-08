@@ -48,14 +48,15 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
                     }
                     cap.receiveEnergy(1000, false);
                     ArtronUse use = tile.getOrCreateArtronUse(ArtronUse.ArtronType.CONVERTER);
-                    use.setArtronUse(1);
-                    use.setTimeToDrain(1);
+                    use.setArtronUsePerTick(1);
+                    use.setTicksToDrain(1);
                     if (tick == 0) {
                         spawnParticle=true;
                         world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
                         if (!world.isRemote()) {
                             world.playSound(null, this.getPos(), SoundInit.ARTRON_GEN, SoundCategory.BLOCKS, 1F, 1F);
                         }
+                        tick=7;
                     }
                     else {
                         world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
