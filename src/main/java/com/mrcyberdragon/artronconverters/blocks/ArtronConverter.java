@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
-import net.tardis.mod.constants.Constants;
+import net.tardis.mod.constants.TardisConstants;
 
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class ArtronConverter extends Block {
     @Override
     public void addInformation(ItemStack stack, IBlockReader worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(Constants.Translations.TOOLTIP_HOLD_SHIFT);
-        tooltip.add(Constants.Translations.TOOLTIP_REDSTONE_REQUIRED);
+        tooltip.add(TardisConstants.Translations.TOOLTIP_HOLD_SHIFT);
+        tooltip.add(TardisConstants.Translations.TOOLTIP_REDSTONE_REQUIRED);
         if (Screen.hasShiftDown()) {
             tooltip.clear();
             tooltip.add(0, stack.getDisplayName());
