@@ -26,6 +26,7 @@ public class TileEntityArtronGenerator extends TileEntity implements ITickableTi
     private ModEnergy energy = new ModEnergy(100000, 4096, 100000);
     private LazyOptional<EnergyStorage> energyHolder = LazyOptional.of(() -> energy);
     private int tick = 7;
+    private boolean energyFull = false;
     private boolean spawnParticle=false;
 
     private ConsoleTile tile;
@@ -56,24 +57,46 @@ public class TileEntityArtronGenerator extends TileEntity implements ITickableTi
                         }
                         tick = 7;
                     }
-                    else {
-                        world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                        spawnParticle = false;
-                    }
                 }
                 else {
-                    world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                    spawnParticle = false;
+                    if(energy.getEnergyStored()<energy.getMaxEnergyStored()) energyFull=false;
+                    if(tick==7) {
+                        if(!energyFull) {
+                            if(energy.getEnergyStored()==energy.getMaxEnergyStored()) energyFull=true;
+                            world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                            spawnParticle = false;
+                        }
+                    }
                 }
             }
             else {
-                world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                spawnParticle = false;
+                if (0 < tick && tick <= 7) {
+                    tick--;
+                }
+                if(energy.getEnergyStored()<energy.getMaxEnergyStored()) energyFull=false;
+                if (tick==0) {
+                    if(!energyFull) {
+                        if(energy.getEnergyStored()==energy.getMaxEnergyStored()) energyFull=true;
+                        world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                        spawnParticle = false;
+                    }
+                    tick=7;
+                }
             }
         }
         else {
-            world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-            spawnParticle = false;
+            if (0 < tick && tick <= 7) {
+                tick--;
+            }
+            if(energy.getEnergyStored()<energy.getMaxEnergyStored()) energyFull=false;
+            if (tick==0) {
+                if(!energyFull) {
+                    if(energy.getEnergyStored()==energy.getMaxEnergyStored()) energyFull=true;
+                    world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                    spawnParticle = false;
+                }
+                tick=7;
+            }
         }
         });
         if(tile == null || tile.isRemoved())

@@ -27,6 +27,9 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
     private ModEnergy energy = new ModEnergy(100000, 1000, 1000);
     private LazyOptional<EnergyStorage> energyHolder = LazyOptional.of(() -> energy);
     private int tick = 7;
+    private long time1 = 0;
+    private long time2 = 0;
+    private boolean energyFull = false;
     private boolean spawnParticle=false;
 
     private ConsoleTile tile;
@@ -42,30 +45,39 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
             if (tile == null) return;
 
             if(world.isBlockPowered(this.getPos())) {
-                if (tile != null && tile.getArtron() > 1 && energy.getEnergyStored() < energy.getMaxEnergyStored()) {
-                    if (0 < tick && tick <= 7) {
-                        tick--;
-                    }
+                if (0 < tick) {
+                    tick--;
+                }
+                if(tick==7)time1=world.getGameTime();
+                if(tick==0)
+                {
+                    time2=world.getGameTime();
+                    tick=7;
+                }
+                if (tile != null && tile.getArtron() > 1 && energy.getEnergyStored() < (energy.getMaxEnergyStored()-999)) {
                     cap.receiveEnergy(1000, false);
                     ArtronUse use = tile.getOrCreateArtronUse(ArtronUse.ArtronType.CONVERTER);
                     use.setArtronUsePerTick(1);
                     use.setTicksToDrain(1);
-                    if (tick == 0) {
-                        spawnParticle=true;
-                        world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                    spawnParticle=true;
+                    if ((time2-time1)>6) {
+                        time1=0;
+                        time2=0;
                         if (!world.isRemote()) {
                             world.playSound(null, this.getPos(), SoundInit.ARTRON_GEN, SoundCategory.BLOCKS, 1F, 1F);
                         }
-                        tick=7;
-                    }
-                    else {
                         world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                        spawnParticle = false;
                     }
                 }
                 else {
-                    world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                    spawnParticle = false;
+                    if(energy.getEnergyStored()<energy.getMaxEnergyStored()) energyFull=false;
+                    if (tick==0) {
+                        if(!energyFull) {
+                            if(energy.getEnergyStored()==energy.getMaxEnergyStored()) energyFull=true;
+                            world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                            spawnParticle = false;
+                        }
+                    }
                 }
 
                 for (Direction dir : Direction.values()) {
@@ -81,8 +93,18 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
 
             }
             else {
-                world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                spawnParticle = false;
+                if (0 < tick && tick <= 7) {
+                    tick--;
+                }
+                if(energy.getEnergyStored()<energy.getMaxEnergyStored()) energyFull=false;
+                if (tick==0) {
+                    if(!energyFull) {
+                        if(energy.getEnergyStored()==energy.getMaxEnergyStored()) energyFull=true;
+                        world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
+                        spawnParticle = false;
+                    }
+                    tick=7;
+                }
             }
 
     });
