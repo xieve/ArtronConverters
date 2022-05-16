@@ -34,3 +34,9 @@ For every AU created, Spectre will lose a hair.
     ordering="NONE"
     side="BOTH"
 
+[[dependencies.artrongen]]
+    modId="cloth-config"
+    mandatory=true
+    versionRange="[4.14.64,)"
+    ordering="NONE"
+    side="BOTH"

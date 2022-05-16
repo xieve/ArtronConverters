@@ -1,11 +1,12 @@
 package com.mrcyberdragon.artronconverters;
 
-import com.mrcyberdragon.artronconverters.init.BlockInit;
-import com.mrcyberdragon.artronconverters.init.SoundRegistry;
-import com.mrcyberdragon.artronconverters.init.TileEntityInit;
-import com.mrcyberdragon.artronconverters.init.ItemInit;
+import com.mrcyberdragon.artronconverters.init.*;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -19,6 +20,9 @@ public class ArtronConverters
     public static final String MODID = "artrongen";
 
     public ArtronConverters() {
+        AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
+        LOGGER.debug("Registered AutoConfig");
+
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::setup);
 
@@ -28,6 +32,9 @@ public class ArtronConverters
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new SoundRegistry());
+
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> (client, parent) -> AutoConfig.getConfigScreen(ModConfig.class, parent).get());
+        LOGGER.debug("Registered Config Screen");
     }
 
     private void setup(final FMLCommonSetupEvent event)

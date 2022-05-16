@@ -1,8 +1,10 @@
 package com.mrcyberdragon.artronconverters.tileentities;
 
+import com.mrcyberdragon.artronconverters.init.ModConfig;
 import com.mrcyberdragon.artronconverters.init.ModEnergy;
 import com.mrcyberdragon.artronconverters.init.SoundInit;
 import com.mrcyberdragon.artronconverters.init.TileEntityInit;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -23,7 +25,8 @@ import java.util.Random;
 
 public class TileEntityArtronGenerator extends TileEntity implements ITickableTileEntity {
 
-    private ModEnergy energy = new ModEnergy(100000, 4096, 100000);
+    private ModConfig.ArtronInterface config = AutoConfig.getConfigHolder(ModConfig.class).getConfig().artronGenerator;
+    private ModEnergy energy = new ModEnergy(config.buffer, config.maxThroughputFE, config.maxThroughputFE);
     private LazyOptional<EnergyStorage> energyHolder = LazyOptional.of(() -> energy);
     private int tick = 7;
     private boolean energyFull = false;
@@ -41,17 +44,16 @@ public class TileEntityArtronGenerator extends TileEntity implements ITickableTi
             if (tile == null) return;
 
         if(tile.getArtron() < tile.getMaxArtron()) {
-            int ConversionAmount = 25000;
             if (!world.isBlockPowered(this.getPos())) {
                 if (0 < tick && tick <= 7) {
                     tick--;
                 }
-                if (energy.getEnergyStored() >= ConversionAmount) {
+                if (energy.getEnergyStored() >= config.conversionRate) {
                     if (tick == 0) {
                         tile.setArtron(tile.getArtron()+1);
                         spawnParticle=true;
                         world.notifyBlockUpdate(this.getPos(), this.getBlockState(), this.getBlockState(), 2);
-                        energy.extractEnergy(ConversionAmount, false);
+                        energy.extractEnergy(config.conversionRate, false);
                         if (!world.isRemote()) {
                             world.playSound(null, this.getPos(), SoundInit.ARTRON_GEN, SoundCategory.BLOCKS, 1F, 1F);
                         }

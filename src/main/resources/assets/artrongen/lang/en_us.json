@@ -7,5 +7,14 @@
   "tooltip.artron_converter.purpose": "Converts Artron Energy to Forge Energy.",
   "tooltip.artron_generator.redstone": "Redstone deactivates this machine.",
   "tooltip.artron_generator.attunable": "This block must be attuned in a Tardis Engine.",
-  "tooltip.artron_converter.attunable": "This block must be attuned in a Tardis Engine."
+  "tooltip.artron_converter.attunable": "This block must be attuned in a Tardis Engine.",
+  "text.autoconfig.artrongen-server.title": "Artron Converters Configuration",
+  "text.autoconfig.artrongen-server.option.artronGenerator": "Electric Artron Generator",
+  "text.autoconfig.artrongen-server.option.artronGenerator.conversionRate": "Conversion Rate",
+  "text.autoconfig.artrongen-server.option.artronGenerator.buffer": "Buffer",
+  "text.autoconfig.artrongen-server.option.artronGenerator.maxThroughputFE": "Maximum FE Input",
+  "text.autoconfig.artrongen-server.option.artronConverter": "Artron Converter",
+  "text.autoconfig.artrongen-server.option.artronConverter.conversionRate": "Conversion Rate",
+  "text.autoconfig.artrongen-server.option.artronConverter.buffer": "Buffer",
+  "text.autoconfig.artrongen-server.option.artronConverter.maxThroughputFE": "Maximum FE Output"
 }

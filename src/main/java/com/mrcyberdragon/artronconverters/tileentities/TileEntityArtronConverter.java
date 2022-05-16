@@ -1,8 +1,10 @@
 package com.mrcyberdragon.artronconverters.tileentities;
 
+import com.mrcyberdragon.artronconverters.init.ModConfig;
 import com.mrcyberdragon.artronconverters.init.ModEnergy;
 import com.mrcyberdragon.artronconverters.init.SoundInit;
 import com.mrcyberdragon.artronconverters.init.TileEntityInit;
+import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
@@ -24,7 +26,8 @@ import java.util.Random;
 
 public class TileEntityArtronConverter extends TileEntity implements ITickableTileEntity {
 
-    private ModEnergy energy = new ModEnergy(100000, 1000, 1000);
+    ModConfig.ArtronInterface config = AutoConfig.getConfigHolder(ModConfig.class).getConfig().artronConverter;
+    private ModEnergy energy = new ModEnergy(config.buffer, config.maxThroughputFE, config.maxThroughputFE);
     private LazyOptional<EnergyStorage> energyHolder = LazyOptional.of(() -> energy);
     private int tick = 7;
     private long time1 = 0;
@@ -54,8 +57,8 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
                     time2=world.getGameTime();
                     tick=7;
                 }
-                if (tile != null && tile.getArtron() > 1 && energy.getEnergyStored() < (energy.getMaxEnergyStored()-999)) {
-                    cap.receiveEnergy(1000, false);
+                if (tile != null && tile.getArtron() > 1 && energy.getEnergyStored() <= (energy.getMaxEnergyStored()-config.conversionRate)) {
+                    cap.receiveEnergy(config.conversionRate, false);
                     ArtronUse use = tile.getOrCreateArtronUse(ArtronUse.ArtronType.CONVERTER);
                     use.setArtronUsePerTick(1);
                     use.setTicksToDrain(1);
@@ -84,8 +87,8 @@ public class TileEntityArtronConverter extends TileEntity implements ITickableTi
                     TileEntity te = world.getTileEntity(getPos().offset(dir));
                     if (te != null) {
                         te.getCapability(CapabilityEnergy.ENERGY, dir.getOpposite()).ifPresent(power -> {
-                            if(cap.getEnergyStored()>=1000) {
-                                cap.extractEnergy(power.receiveEnergy(1000, false), false);
+                            if(cap.getEnergyStored()>=config.conversionRate) {
+                                cap.extractEnergy(power.receiveEnergy(config.conversionRate, false), false);
                             }
                         });
                     }

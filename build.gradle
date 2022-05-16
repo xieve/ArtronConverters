@@ -121,6 +121,9 @@ repositories{
     maven { url = 'https://libraries.minecraft.net/' } //Temporary fix for forge maven change
     mavenCentral()
     maven { url = 'https://maven.minecraftforge.net/' }
+
+    // Cloth Config
+    maven { url "https://maven.shedaniel.me/" }
 }
 
 dependencies {
@@ -141,6 +144,7 @@ dependencies {
 
     implementation fg.deobf('com.gitlab.Spectre0987:TardisMod-1-14:1.16-SNAPSHOT')
 
+    compileOnly fg.deobf("me.shedaniel.cloth:cloth-config-forge:4.14.64")
 
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
